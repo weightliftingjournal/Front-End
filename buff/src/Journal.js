@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
 
-export default function Journal({workouts}) {
+export default function Journal({workouts, deleteItem}) {
     
 
     const Workout = styled.div`
@@ -15,12 +15,18 @@ export default function Journal({workouts}) {
     //                 <h1>New Workout</h1>
     //             </Workout>);
     // };
+    const deleteWorkout = (indexToDelete) =>{
+        const tempArry = [...workouts];
+        tempArry.splice(indexToDelete, 1);
+        deleteItem(tempArry);
+    };
 
     return (
         <div>
-            {workouts.map(workout => {
+            {workouts.map((workout, index) => {
                 return(
                 <Workout>
+                    <button onClick={() => deleteWorkout(index)}>-</button>
                     <h1>{workout}</h1>
                 </Workout>
                 )

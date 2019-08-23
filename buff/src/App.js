@@ -7,12 +7,16 @@ function App() {
 
     const [workouts, setWorkouts] = useState(['Leg Day', 'Push Day', 'Arms Day']);
 
+    const deleteWorkout = (workoutArr) =>{
+      setWorkouts(workoutArr);
+    }
+
   return (
     <div className="App">
       
       <Route path='/journal' 
              render={(props) => (
-             <Journal {...props} workouts={workouts} />
+             <Journal {...props} workouts={workouts} deleteItem={deleteWorkout} />
              )} />
     </div>
   );
