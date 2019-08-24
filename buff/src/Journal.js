@@ -27,7 +27,7 @@ export default function Journal({workouts, deleteItem}) {
                 return(
                 <Workout>
                     <button onClick={() => deleteWorkout(index)}>-</button>
-                    <h1>{workout}</h1>
+                    <h1>{workout.region}</h1>
                 </Workout>
                 )
             })}
