@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
+import {NavLink} from 'react-router-dom'
+import axios from 'axios';
 
-export default function Journal({workouts, deleteItem}) {
-    
+export default function Journal({ userLogin }) {
+    const [allWorkOuts, setAllWorkouts] = useState([]);
+    const [users, setUsers] = useState();
 
     const Workout = styled.div`
         max-width: 25%;
@@ -10,25 +13,66 @@ export default function Journal({workouts, deleteItem}) {
         background: red;
     `;
 
-    // const createWorkoutType = () => {
-    //     return (<Workout>
-    //                 <h1>New Workout</h1>
-    //             </Workout>);
-    // };
+    useEffect(() => {
+        axios.get(`https://weight-lift-be.herokuapp.com/api/restricted/users`)
+          .then(res => {
+            console.log('User Data: ', res);
+            //setAllWorkouts(res.data.journals);
+          })
+          .catch(err => {
+            console.log('ERROR: ', err);
+          });
+      }, []);
+
+      useEffect(() => {
+        axios.get(`https://weight-lift-be.herokuapp.com/api/restricted/journals/`)
+          .then(res => {
+            console.log('Journal Data: ', res);
+            setAllWorkouts(res.data.journals);
+          })
+          .catch(err => {
+            console.log('ERROR: ', err);
+          });
+      }, []);
+
+    //   useEffect(() => {
+    //     axios.get(`https://weight-lift-be.herokuapp.com/api/restricted/journals/${userLogin.id}`)
+    //       .then(res => {
+    //         console.log('Res Data: ', res);
+    //         //setWorkouts(res.data.journals);
+    //       })
+    //       .catch(err => {
+    //         console.log('ERROR: ', err);
+    //       });
+    //   }, [userLogin.id]);
+
     const deleteWorkout = (indexToDelete) =>{
-        const tempArry = [...workouts];
+        const tempArry = [...allWorkOuts];
         tempArry.splice(indexToDelete, 1);
-        deleteItem(tempArry);
+        setAllWorkouts(tempArry);
     };
+
+    const getUserWorkout = (workoutObj, index) => {
+        if(`${workoutObj.userId}` === `${userLogin.id - 6}`){
+            return(
+                <Workout>
+                    <button onClick={() => deleteWorkout(index)}>-</button>
+                    <h1>{workoutObj.region}</h1>
+                </Workout>
+            )
+        }
+    }
 
     return (
         <div>
-            {workouts.map((workout, index) => {
+            {allWorkOuts.map((workout, index) => {
                 return(
-                <Workout>
-                    <button onClick={() => deleteWorkout(index)}>-</button>
-                    <h1>{workout.region}</h1>
-                </Workout>
+                // <NavLink to={``}></NavLink>
+                // <Workout>
+                //     <button onClick={() => deleteWorkout(index)}>-</button>
+                //     <h1>{workout.region}</h1>
+                // </Workout>
+                    getUserWorkout(workout, index)
                 )
             })}
         </div>
