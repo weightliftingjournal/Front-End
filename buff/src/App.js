@@ -1,9 +1,9 @@
+import Login from "./Login.js";
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
 import Journal from './Journal';
 import Entry from './JournalEntry';
-import Login from './Login';
 import axios from 'axios';
 import JournalEntry from './JournalEntry';
 
@@ -47,10 +47,7 @@ function App() {
 
   return (
     <div className="App">
-      <Route path='/' 
-             render={(props) => (
-             <Login {...props} getLogin={getLogin} />
-             )} />
+      <Login />
       <Route exact path='/journal/:id' 
              render={(props) => (
              <Journal {...props}  userLogin={login} getRegion={setWorkoutRegion} />
