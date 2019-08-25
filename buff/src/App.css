@@ -1,4 +1,72 @@
-.App {
+.background {
+  background-image: url("../src/assets/weightlifting-png-1000.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 820px;
+  display: flex;
+  margin-top: 100px;
+}
+
+.login-form {
+  border: 1px solid black;
+  width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  background: rgba(64, 13, 130, 0.95);
+  box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.33);
+  border-radius: 40px;
+  width: 700px;
+  height: 550px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  /* font-size: 52px; */
+  /* line-height: 61px; */
+  /* identical to box height */
+
+  /* text-align: center; */
+  letter-spacing: 0.01em;
+
+  color: #ffffff;
+}
+
+.login-form h2 {
+  font-size: 60px;
+}
+
+.form-container {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+}
+
+.some-form {
+  /* border: 2px solid greenyellow; */
+  display: flex;
+  flex-direction: column;
+}
+
+.some-form h4 {
+  margin: 0 25px;
+}
+
+.some-form input {
+  margin: 0 25px 25px 25px;
+  padding: 10px 5px;
+  border-radius: 8px;
+}
+
+.some-form button {
+  width: 100px;
+  height: 25px;
+  border-radius: 8px;
+  margin-left: 65px;
+}
+
+/* .App {
   text-align: center;
 }
 
@@ -30,4 +98,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
