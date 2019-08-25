@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
-import {NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom';
 import axios from 'axios';
 
-export default function Journal({ userLogin }) {
+export default function Journal({ userLogin, getRegion }) {
     const [allWorkOuts, setAllWorkouts] = useState([]);
     const [users, setUsers] = useState();
 
@@ -52,13 +52,19 @@ export default function Journal({ userLogin }) {
         setAllWorkouts(tempArry);
     };
 
+    const handleClick = (workoutRegion) => {
+        getRegion(workoutRegion);
+    }
+
     const getUserWorkout = (workoutObj, index) => {
         if(`${workoutObj.userId}` === `${userLogin.id - 6}`){
             return(
-                <Workout>
-                    <button onClick={() => deleteWorkout(index)}>-</button>
-                    <h1>{workoutObj.region}</h1>
-                </Workout>
+                <NavLink to={`/entry/${userLogin.id - 6}`}>
+                    <Workout onClick={() => handleClick(workoutObj.region)}>
+                        <button onClick={() => deleteWorkout(index)}>-</button>
+                        <h1>{workoutObj.region}</h1>
+                    </Workout>
+                </NavLink>
             )
         }
     }
