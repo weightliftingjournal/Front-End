@@ -5,19 +5,49 @@ import * as Yup from 'yup';
 
 function Login({ errors, touched }) {
     return (
-        <Form>
-            {touched.username && errors.username && <p>{errors.username}</p>}
-            <Field type='text' 
-                   component='input' 
-                   placeholder='username' 
-                   name='username' />
-            {touched.password && errors.password && <p>{errors.password}</p>}
-            <Field type='text' 
-                   component='input' 
-                   placeholder='password' 
-                   name='password' />
-            <button type='submit'>Submit</button>
-        </Form>
+        // <Form>
+        //     {touched.username && errors.username && <p>{errors.username}</p>}
+        //     <Field type='text' 
+        //            component='input' 
+        //            placeholder='username' 
+        //            name='username' />
+        //     {touched.password && errors.password && <p>{errors.password}</p>}
+        //     <Field type='text' 
+        //            component='input' 
+        //            placeholder='password' 
+        //            name='password' />
+        //     <button type='submit'>Submit</button>
+        // </Form>
+        <div className="background">
+            <div className="login-form">
+                <h2>Please Login Below</h2>
+                <div className="form-container">
+                <Form className="some-form">
+                    <h4>Username</h4>
+                    {touched.username && errors.username && <p>{errors.username}</p>}
+                    <Field
+                    component="input"
+                    type="input"
+                    name="username"
+                    placeholder="enter username"
+                    />
+                    <h4>Password</h4>
+                    {touched.password && errors.password && <p>{errors.password}</p>}
+                    <Field
+                    component="input"
+                    type="password"
+                    name="password"
+                    placeholder="enter password"
+                    />
+
+                    <button type="submit">Submit</button>
+                </Form>
+                </div>
+                <h2>
+                No Accout? <span>Sign up!</span>
+                </h2>
+            </div>
+        </div>
     )
 }
 
@@ -30,11 +60,12 @@ const LoginFormik = withFormik({
     },
     handleSubmit(values, { props }){
         console.log('Values Login: ', values);
-        axios.post('https://weight-lift-be.herokuapp.com/api/auth/login', values)
+        axios.post('https://get-hercules.herokuapp.com/api/auth/login', values)
             .then(res => {
                 console.log('Posted successfully');
                 console.log('Login Info: ', res);
                 props.getLogin(res.data.user);
+                localStorage.setItem('token', res.data.token);
                 props.history.push(`/journal/${res.data.user.id}`)
             })
             .catch(err => {
