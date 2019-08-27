@@ -44,7 +44,7 @@ function App() {
 
   return (
     <div className="App">
-      <Route path='/' 
+      <Route exact path='/' 
              render={(props) => (
              <Login {...props} getLogin={getLogin} />
              )} />

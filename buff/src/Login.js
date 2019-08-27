@@ -44,7 +44,7 @@ function Login({ errors, touched }) {
                 </Form>
                 </div>
                 <h2>
-                No Accout? <span>Sign up!</span>
+                No Account? <span>Sign up!</span>
                 </h2>
             </div>
         </div>

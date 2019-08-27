@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import Cards from './Cards';
@@ -7,6 +8,7 @@ import 'semantic-ui-css/semantic.min.css';
 
 export default function JournalEntry({ login }) {
     const [exercises, setExercises] = useState([]);
+    const [authorized, setAuthorized] = useState(true);
 
     const Exercise = styled.div`
         display: flex;
@@ -20,8 +22,10 @@ export default function JournalEntry({ login }) {
             .then(res => {
                 console.log('Exercise Data: ', res);
                 setExercises(res.data.exercises);
+                setAuthorized(true);
             })
             .catch(err => {
+                setAuthorized(false);
                 console.log('Error: ', err);
             });
     }, []);
@@ -34,11 +38,26 @@ export default function JournalEntry({ login }) {
         }
     }
 
+    const checkAuthorization = () => {
+        if(authorized){
+            return(
+                <Card.Group>
+                    {exercises.map((exercise) => {
+                        return getUserExercise(exercise)
+                    })}
+                </Card.Group>
+            )
+        }else{
+            return <Redirect to='/' />
+        }
+    };
+
     return (
-        <Card.Group>
-            {exercises.map((exercise) => {
-                return getUserExercise(exercise)
-            })}
-        </Card.Group>
+        // <Card.Group>
+        //     {exercises.map((exercise) => {
+        //         return getUserExercise(exercise)
+        //     })}
+        // </Card.Group>
+        checkAuthorization()
     )
 }

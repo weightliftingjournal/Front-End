@@ -19,7 +19,7 @@ time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: 100%;
+	font-size: 62.5%;
 	font: inherit;
 	vertical-align: baseline;
 }
@@ -48,7 +48,7 @@ table {
 }
 
 html{
-	font-size: 62.5%;
+	font-size: 62.5% !important;
 }
 
 h1{
