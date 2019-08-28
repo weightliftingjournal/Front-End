@@ -9,6 +9,7 @@ import 'semantic-ui-css/semantic.min.css';
 export default function JournalEntry({ login }) {
     const [exercises, setExercises] = useState([]);
     const [authorized, setAuthorized] = useState(true);
+    const [updateExercise, setUpdateExercise] = useState(false)
 
     const Exercise = styled.div`
         display: flex;
@@ -28,12 +29,12 @@ export default function JournalEntry({ login }) {
                 setAuthorized(false);
                 console.log('Error: ', err);
             });
-    }, []);
+    }, [updateExercise]);
 
     const getUserExercise = (exerciseObj) => {
         if(`${exerciseObj.userId}` === `${login.id}`){
             return(
-                <Cards exercise={exerciseObj} />
+                <Cards exercise={exerciseObj} update={setUpdateExercise} updateValue={updateExercise} />
             )
         }
     }
