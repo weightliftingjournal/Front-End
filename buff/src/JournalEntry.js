@@ -5,12 +5,14 @@ import axios from 'axios';
 import Cards from './Cards';
 import { Card } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
+import JournalForm from './JournalForm';
 
 export default function JournalEntry({ login }) {
     const [exercises, setExercises] = useState([]);
     const [authorized, setAuthorized] = useState(true);
     const [updateExercise, setUpdateExercise] = useState(false)
-    const [deleteExercise, setDeleteExercise] = useState();
+    const [deleteExercise, setDeleteExercise] = useState(0);
+    const [showForm, setShowForm] = useState();
     //const [mappedOverExercise, setMappedOverExercise] = useState();
 
     const Exercise = styled.div`
@@ -18,8 +20,33 @@ export default function JournalEntry({ login }) {
         max-width: 25%;
         justify-content: space-around;
     `;
+
+    // useEffect(() => {
+    //     const token = localStorage.getItem('token');
+    //     axios.delete(`https://get-hercules.herokuapp.com/api/restricted/exercises/${deleteExercise}`, {headers: {Authorization: token}})
+    //         .then(res => {
+    //             console.log('Exercise Succesfully Deleted');
+    //             setUpdateExercise(true);
+    //         })
+    //         .catch(err => {
+    //             console.log('Error: ', err);
+    //             console.log('ID FOR USER: ', deleteExercise);
+    //         })
+    // }, [deleteExercise]);
     
     useEffect(() => {
+        // if(deleteExercise > 0){
+        //     axios.delete(`https://get-hercules.herokuapp.com/api/restricted/exercises/${deleteExercise}`, {headers: {Authorization: token}})
+        //         .then(res => {
+        //             console.log('Exercise Succesfully Deleted');
+        //             //setUpdateExercise(true);
+        //             setDeleteExercise(0);
+        //         })
+        //         .catch(err => {
+        //             console.log('Error: ', err);
+        //             console.log('ID FOR USER: ', deleteExercise);
+        //         })
+        // }
         const token = localStorage.getItem('token');
         axios.get('https://get-hercules.herokuapp.com/api/restricted/exercises', {headers: {Authorization: token}})
             .then(res => {
@@ -33,32 +60,19 @@ export default function JournalEntry({ login }) {
             });
     }, [updateExercise]);
 
-    // const deleteItem = (itemNum) => {
-    //     console.log('ItemNum: ', itemNum);
-    //     //setDeleteExercise(itemNum);
-    //     axios.delete(`https://get-hercules.herokuapp.com/api/restricted/exercises/${itemNum}`, {headers: {Authorization: localStorage.getItem('token')}})
-    //         .then(res => {
-    //             console.log('Exercise Succesfully Deleted: ', res);
-    //             window.location.reload();
-    //         })
-    //         .catch(err => {
-    //             console.log('Error: ', err);
-    //             console.log('ID FOR USER: ', deleteExercise);
-    //         })
-    // }
-
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        axios.delete(`https://get-hercules.herokuapp.com/api/restricted/exercises/${deleteExercise}`, {headers: {Authorization: token}})
+    const deleteItem = (itemNum) => {
+        console.log('ItemNum: ', itemNum);
+        //setDeleteExercise(itemNum);
+        axios.delete(`https://get-hercules.herokuapp.com/api/restricted/exercises/${itemNum}`, {headers: {Authorization: localStorage.getItem('token')}})
             .then(res => {
-                console.log('Exercise Succesfully Deleted');
+                console.log('Exercise Succesfully Deleted: ', res);
                 setUpdateExercise(!updateExercise);
             })
             .catch(err => {
                 console.log('Error: ', err);
-                console.log('ID FOR USER: ', deleteExercise);
+                //console.log('ID FOR USER: ', deleteExercise);
             })
-    }, [deleteExercise]);
+    }
 
     const getUserExercise = (exerciseObj) => {
         if(`${exerciseObj.userId}` === `${login.id}`){
@@ -66,17 +80,21 @@ export default function JournalEntry({ login }) {
                 <Cards exercise={exerciseObj} 
                        update={setUpdateExercise} 
                        updateValue={updateExercise} 
-                       itemToDelete={setDeleteExercise} />
+                       itemToDelete={deleteItem} />
             )
         }
     }
 
     const checkAuthorization = () => {
         if(authorized){
-            if(exercises.length === 0){
-                return <div>loading</div>
-            }else{
-                return(
+            return(
+                <div>
+                    <button onClick={() => setShowForm(!showForm)}>Add Exercise</button>
+                    <JournalForm show={setShowForm} 
+                                    showValue={showForm}
+                                    update={setUpdateExercise} 
+                                    updateValue={updateExercise} 
+                                    login={login} />
                     <Card.Group>
                         {exercises.map((exercise) => (
                             //  <Cards exercise={exercise} 
@@ -87,8 +105,8 @@ export default function JournalEntry({ login }) {
                             getUserExercise(exercise)
                         ))}
                     </Card.Group>
-                )
-            }
+                </div>
+            )
         }else{
             return <Redirect to='/' />
         }

@@ -4,7 +4,7 @@ import 'semantic-ui-css/semantic.min.css';
 import styled from 'styled-components';
 import CardsForm from './CardsForm';
 
-export default function Cards({ exercise, update, updateValue, itemToDelete, login }) {
+export default function Cards({ exercise, update, updateValue, itemToDelete }) {
     const { name, reps, sets, weight } = exercise;
     const [form, setForm] = useState(false);
     //const [refresh, setRefresh] = useState(exercise)
