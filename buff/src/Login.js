@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
-import { withFormik, Form, Field } from 'formik';
-import * as Yup from 'yup';
+import React, { useState, useEffect } from "react";
+import { Form, Field, withFormik } from "formik";
+import { Link } from "react-router-dom";
 
 function Login({ errors, touched }) {
     return (
@@ -80,4 +79,4 @@ const LoginFormik = withFormik({
     })
 })(Login);
 
-export default LoginFormik;
+export default LoginForm;
