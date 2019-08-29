@@ -5,6 +5,7 @@ import Journal from './Journal';
 import Login from './Login';
 import NavBar from './Navbar';
 import Header from './Header';
+import Register from './Register';
 // import axios from 'axios';
 // import JournalEntry from './JournalEntry';
 
@@ -52,6 +53,7 @@ function App() {
              render={(props) => (
              <Login {...props} getLogin={getLogin} />
              )} />
+      <Route path='/register' component={Register} />
       <Route path='/journal/:id' 
              render={(props) => (
              <Journal {...props}  userLogin={login} />
