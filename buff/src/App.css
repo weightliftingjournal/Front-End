@@ -66,6 +66,69 @@
   margin-left: 65px;
 }
 
+.padding{
+  padding: 15px;
+}
+
+.large{
+  font-size: 36px;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.border{
+  border: none !important;
+  box-shadow: 0px 4px 22px rgba(0, 0, 0, 0.25) !important;
+  border-radius: 15px !important;
+  padding: 25px !important;
+  background: #400D82 !important;
+}
+
+.white{
+  font-size: 30px;
+  color: white;
+  padding: 10px;
+}
+
+.edit{
+  padding: 20px !important;
+  border-radius: 5px !important;
+  font-size: 25px !important;
+  width: 150px !important;
+  color: white !important;
+  background-color: black !important;
+  box-shadow: 0px 4px 22px rgba(0, 0, 0, 0.25) !important;
+  margin: 15px !important;
+}
+
+.delete{
+  padding: 15px !important;
+  border-radius: 5px !important;
+  font-size: 25px !important;
+  width: 150px !important;
+  color: white !important;
+  background-color: red !important;
+  box-shadow: 0px 4px 22px rgba(0, 0, 0, 0.25) !important;
+  margin: 15px !important;
+}
+
+.big{
+  padding: 35px !important;
+  border-radius: 8px !important;
+  font-size: 35px !important;
+  width: 350px !important;
+  color: white !important;
+  background-color: #400D82 !important;
+  box-shadow: 0px 4px 22px rgba(0, 0, 0, 0.25) !important;
+  margin-left: 46% !important;
+  margin-top: -35px !important;
+  margin-bottom: 35px !important;
+}
+
+.center{
+  margin: 0 auto !important;
+}
 /* .App {
   text-align: center;
 }

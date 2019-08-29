@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Form, Field, withFormik } from "formik";
-import { Link } from "react-router-dom";
+import React from 'react';
+import axios from 'axios';
+import { withFormik, Form, Field } from 'formik';
+import * as Yup from 'yup';
 
 function Login({ errors, touched }) {
     return (
@@ -64,6 +65,7 @@ const LoginFormik = withFormik({
                 console.log('Posted successfully');
                 console.log('Login Info: ', res);
                 props.getLogin(res.data.user);
+                localStorage.setItem('id', res.data.user.id);
                 localStorage.setItem('token', res.data.token);
                 props.history.push(`/journal/${res.data.user.id}`)
             })
