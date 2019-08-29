@@ -12,7 +12,7 @@ export default function JournalEntry({ login }) {
     const [authorized, setAuthorized] = useState(true);
     const [updateExercise, setUpdateExercise] = useState(false)
     const [deleteExercise, setDeleteExercise] = useState(0);
-    const [showForm, setShowForm] = useState();
+    //const [showForm, setShowForm] = useState();
     //const [mappedOverExercise, setMappedOverExercise] = useState();
 
     const Exercise = styled.div`
@@ -89,12 +89,15 @@ export default function JournalEntry({ login }) {
         if(authorized){
             return(
                 <div>
-                    <button onClick={() => setShowForm(!showForm)}>Add Exercise</button>
-                    <JournalForm show={setShowForm} 
+                    {/* <button onClick={() => setShowForm(!showForm)}>Add Exercise</button> */}
+                    {/* <JournalForm show={setShowForm} 
                                     showValue={showForm}
                                     update={setUpdateExercise} 
                                     updateValue={updateExercise} 
-                                    login={login} />
+                                    login={login} /> */}
+                    <JournalForm update={setUpdateExercise} 
+                                 updateValue={updateExercise} 
+                                 login={login} />
                     <Card.Group>
                         {exercises.map((exercise) => (
                             //  <Cards exercise={exercise} 

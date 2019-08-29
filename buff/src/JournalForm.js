@@ -2,33 +2,44 @@ import React from 'react'
 import { withFormik, Form, Field } from 'formik';
 import styled from 'styled-components';
 import axios from 'axios';
-// import 'semantic-ui-css/semantic.min.css';
+import { Button, Header, Modal } from 'semantic-ui-react'
+import 'semantic-ui-css/semantic.min.css';
 // import { Form } from 'semantic-ui-react';
 
 const formStyle = {
     margin: 'auto auto'
 };
 
-export default function JournalForm({ show, showValue, update, updateValue, login }) {
-    const ModalContainer = styled.div`
-        position: fixed;
-        z-index: 1;
-        background: rgba(0, 0, 0, 0.5);
-    `;  
+export default function JournalForm({ update, updateValue, login }) {
+    // const ModalContainer = styled.div`
+    //     position: fixed;
+    //     z-index: 1;
+    //     background: rgba(0, 0, 0, 0.5);
+    // `;  
 
-    const showExerciseForm = () => {
-        if(showValue){
-            return <FormFormik update={update} 
-                               show={show} 
-                               updateValue={updateValue} 
-                               login={login} />
-        }
-    }
+    // const showExerciseForm = () => {
+    //     if(showValue){
+    //         return (
+
+    //         <FormFormik update={update} 
+    //                     updateValue={updateValue} 
+    //                     login={login} />
+    //         )
+    //     }
+    // }
     
     return (
-        <ModalContainer>
-            {showExerciseForm()}
-        </ModalContainer>
+        <Modal trigger={<Button>Add Exercise</Button>}>
+            <Modal.Header>Add an Exercise</Modal.Header>
+            <Modal.Content>
+                <FormFormik update={update} 
+                            updateValue={updateValue} 
+                            login={login} />
+            </Modal.Content>
+        </Modal>
+        // <ModalContainer>
+        //     {showExerciseForm()}
+        // </ModalContainer>
     )
 }
 
@@ -50,7 +61,7 @@ function CreationForm(){
                    type='number'
                    placeholder='Weight' 
                    name='weight' />
-            <button type='submit'>Submit</button>
+            <Button type='submit'>Submit</Button>
         </Form>
     );
 }
@@ -77,7 +88,7 @@ const FormFormik = withFormik({
                 console.log('Post successful');
                 console.log('JOURNAL-FORM-DATA: ', res);
                 //props.change(false);
-                props.show(false);
+                //props.show(false);
                 props.update(!props.updateValue);
             })
             .catch(err => {
