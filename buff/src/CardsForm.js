@@ -5,25 +5,66 @@ import 'semantic-ui-css/semantic.min.css';
 import { withFormik, Form, Field } from 'formik';
 import axios from 'axios';
 
+const formStyle = {
+    minHeight: '300px',
+    display: 'flex',
+    flexDirection: 'column',
+    margin: 'auto auto',
+    justifyContent: 'space-between'
+};
+
+const removePX = (obj, prop) => {
+    //prop must be string
+    let tempArr = (obj[prop]).split('');
+    tempArr.pop();
+    tempArr.pop();
+    tempArr = tempArr.join('');
+    console.log('tempArr: ', tempArr);
+    return tempArr;
+}
+
+const formInput = {
+    //border: '1px solid black',
+    height: Number(removePX(formStyle,'minHeight')) * 0.2 + 'px',
+    fontSize: Number(removePX(formStyle,'minHeight')) * 0.1 + 'px'
+};
+
+// const formName = {
+//     height: '100px',
+//     fontWeight: 'bold',
+//     fontSize: '80px',
+//     border: 'none'
+// };
+
+const formSubmit = {
+    margin: '0 auto',
+    maxWidth: '30%',
+    height: '50px',
+    fontSize: '30px',
+    textAlign: 'center',
+    paddingBottom: '50px'
+}
+
 function CardsForm(){
     return(
-        <Form>
+        <Form style={formStyle}>
             <Field component='input' 
                    placeholder='exercise name' 
-                   name='name' />
+                   name='name'
+                   style={formInput} />
             <Field component='input'
-                   type='number'
                    placeholder='Reps' 
-                   name='reps' />
+                   name='reps'
+                   style={formInput} />
             <Field component='input' 
-                   type='number'
                    placeholder='Sets' 
-                   name='sets' />
+                   name='sets'
+                   style={formInput} />
             <Field component='input' 
-                   type='number'
                    placeholder='Weight' 
-                   name='weight' />
-            <button type='submit'>Submit</button>
+                   name='weight'
+                   style={formInput} />
+            <button type='submit' style={formSubmit}>Submit</button>
         </Form>
     )
 }
@@ -32,9 +73,9 @@ const CardsFormik = withFormik({
     mapPropsToValues({ name, reps, sets, weight }){
         return({
             name: name || '',
-            reps: reps || 0,
-            sets: sets || 0,
-            weight: weight || 0
+            reps: reps || '',
+            sets: sets || '',
+            weight: weight || ''
         })
     },
     handleSubmit(values, { props }){

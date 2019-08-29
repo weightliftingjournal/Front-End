@@ -7,8 +7,45 @@ import 'semantic-ui-css/semantic.min.css';
 // import { Form } from 'semantic-ui-react';
 
 const formStyle = {
-    margin: 'auto auto'
+    minHeight: '300px',
+    display: 'flex',
+    flexDirection: 'column',
+    margin: 'auto auto',
+    justifyContent: 'space-between'
 };
+
+const removePX = (obj, prop) => {
+    //prop must be string
+    let tempArr = (obj[prop]).split('');
+    tempArr.pop();
+    tempArr.pop();
+    tempArr = tempArr.join('');
+    console.log('tempArr: ', tempArr);
+    return tempArr;
+}
+
+const formInput = {
+    //border: '1px solid black',
+    height: Number(removePX(formStyle,'minHeight')) * 0.2 + 'px',
+    fontSize: Number(removePX(formStyle,'minHeight')) * 0.1 + 'px'
+};
+
+const formName = {
+    height: '100px',
+    fontWeight: 'bold',
+    fontSize: '80px',
+    border: 'none'
+};
+
+const formSubmit = {
+    margin: '0 auto',
+    maxWidth: '20%',
+    height: '50px',
+    fontSize: '30px',
+    textAlign: 'center',
+    paddingBottom: '50px'
+}
+
 
 export default function JournalForm({ update, updateValue, login }) {
     // const ModalContainer = styled.div`
@@ -30,7 +67,7 @@ export default function JournalForm({ update, updateValue, login }) {
     
     return (
         <Modal trigger={<Button className='big'>Add Exercise</Button>}>
-            <Modal.Header>Add an Exercise</Modal.Header>
+            <Modal.Header style={formName}>Add an Exercise</Modal.Header>
             <Modal.Content>
                 <FormFormik update={update} 
                             updateValue={updateValue} 
@@ -48,20 +85,21 @@ function CreationForm(){
         <Form style={formStyle}>
             <Field component='input' 
                    placeholder='exercise name' 
-                   name='name' />
+                   name='name' 
+                   style={formInput} />
             <Field component='input'
-                   type='number'
                    placeholder='Reps' 
-                   name='reps' />
+                   name='reps' 
+                   style={formInput} />
             <Field component='input' 
-                   type='number'
                    placeholder='Sets' 
-                   name='sets' />
+                   name='sets' 
+                   style={formInput} />
             <Field component='input' 
-                   type='number'
                    placeholder='Weight' 
-                   name='weight' />
-            <Button type='submit'>Submit</Button>
+                   name='weight' 
+                   style={formInput} />
+            <Button type='submit' style={formSubmit}>Submit</Button>
         </Form>
     );
 }
@@ -70,9 +108,9 @@ const FormFormik = withFormik({
     mapPropsToValues({ name, reps, sets, weight }){
         return({
             name: name || '',
-            reps: reps || 0,
-            sets: sets || 0,
-            weight: weight || 0
+            reps: reps || '',
+            sets: sets || '',
+            weight: weight || ''
         })
     },
     handleSubmit(values, { props }){
@@ -80,7 +118,7 @@ const FormFormik = withFormik({
         //const userValues = {...values };
         // userValues.journalId = props.exercise.userId;
         // userValues.userId = props.exercise.userId;
-        values.userId = props.login.id;
+        values.userId = localStorage.getItem('id');
         axios.post(`https://get-hercules.herokuapp.com/api/restricted/exercises/`, 
         values,
         {headers: {Authorization: token}})
