@@ -16,9 +16,10 @@ export default function Cards({ exercise, update, updateValue, itemToDelete }) {
     const switchToForm = () => {
         if(form){
             return (
-                <Card>
-                    <CardsForm exercise={exercise} change={setForm} update={update} updateValue={updateValue} />
-                </Card>
+                <CardsForm exercise={exercise} 
+                           change={setForm} 
+                           update={update} 
+                           updateValue={updateValue} />
             )
         }else{
             return(
