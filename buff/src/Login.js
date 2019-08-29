@@ -81,4 +81,4 @@ const LoginFormik = withFormik({
     })
 })(Login);
 
-export default LoginFormik;
+export default LoginForm;
