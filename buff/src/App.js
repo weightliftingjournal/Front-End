@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
 import Journal from './Journal';
 import Login from './Login';
-import axios from 'axios';
-import JournalEntry from './JournalEntry';
+import NavBar from './Navbar';
+import Header from './Header';
+// import axios from 'axios';
+// import JournalEntry from './JournalEntry';
 
 function App() {
     
@@ -44,6 +46,8 @@ function App() {
 
   return (
     <div className="App">
+      <NavBar />
+      <Header />
       <Route exact path='/' 
              render={(props) => (
              <Login {...props} getLogin={getLogin} />

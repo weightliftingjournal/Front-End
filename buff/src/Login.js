@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
@@ -65,6 +65,7 @@ const LoginFormik = withFormik({
                 console.log('Posted successfully');
                 console.log('Login Info: ', res);
                 props.getLogin(res.data.user);
+                localStorage.setItem('id', res.data.user.id);
                 localStorage.setItem('token', res.data.token);
                 props.history.push(`/journal/${res.data.user.id}`)
             })

@@ -1,7 +1,7 @@
 import React from 'react'
-import { Card, Button } from 'semantic-ui-react';
+//import { Card, Button } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
-import styled from 'styled-components';
+//import styled from 'styled-components';
 import { withFormik, Form, Field } from 'formik';
 import axios from 'axios';
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import { withFormik, Form, Field } from 'formik';
-import styled from 'styled-components';
+//import styled from 'styled-components';
 import axios from 'axios';
-import { Button, Header, Modal } from 'semantic-ui-react'
+import { Button, Modal } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
 // import { Form } from 'semantic-ui-react';
 
@@ -29,7 +29,7 @@ export default function JournalForm({ update, updateValue, login }) {
     // }
     
     return (
-        <Modal trigger={<Button>Add Exercise</Button>}>
+        <Modal trigger={<Button className='big'>Add Exercise</Button>}>
             <Modal.Header>Add an Exercise</Modal.Header>
             <Modal.Content>
                 <FormFormik update={update} 
