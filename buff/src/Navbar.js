@@ -9,7 +9,7 @@ export default function Navbar() {
                <a href="#Icon">Buff</a>
            </div>
            <div className="nav-right">
-           <a href="#Home">Home</a>
+           <a href="https://buff-marketing-webpt9-john.netlify.com/">Home</a>
            <NavLink to='/'>Login</NavLink>
            {/* <a href="#Login">Login</a> */}
            </div>
