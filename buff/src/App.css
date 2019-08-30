@@ -37,6 +37,10 @@
   font-size: 60px;
 }
 
+.login-form h2 span {
+  color: white;
+}
+
 .form-container {
   /* border: 1px solid red; */
   display: flex;
