@@ -1,0 +1,9 @@
+[build]
+ command = "yarn build"
+ functions = "functions"
+ publish = "[subdirectory folder name]/build"
+ base = "buff"
+ [[redirects]]
+   from = "/*"
+   to = "/index.html"
+   status = 200
