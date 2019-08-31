@@ -65,9 +65,10 @@
 
 .some-form button {
   width: 100px;
-  height: 25px;
+  height: 39px;
   border-radius: 8px;
-  margin-left: 65px;
+  margin: 0 auto;
+  font-size: 18px;
 }
 
 .padding{
